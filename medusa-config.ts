@@ -16,24 +16,24 @@
 // })
 
 import { loadEnv, defineConfig } from '@medusajs/framework/utils'
+
 loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
-const parseCors = (v?: string) =>
-  (v || '').split(',').map(s => s.trim()).filter(Boolean)
-
 export default defineConfig({
-  admin: {
-    // AdminはVercelに分離するので無効化
-    disable: process.env.ADMIN_DISABLED === 'true' || true,
-  },
+  // ルートB: Adminを分離デプロイするので無効化
+  admin: { disable: true },
+
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
     redisUrl: process.env.REDIS_URL,
+
     http: {
-      adminCors: parseCors(process.env.ADMIN_CORS), // 例: https://your-admin.vercel.app
-      storeCors: parseCors(process.env.STORE_CORS),
-      authCors:  parseCors(process.env.AUTH_CORS),
-      jwtSecret:    process.env.JWT_SECRET || 'supersecret',
+      // ★ここは「文字列」を渡す（カンマ区切り対応は“値側”でやる）
+      adminCors: process.env.ADMIN_CORS || '',
+      storeCors: process.env.STORE_CORS || '',
+      authCors:  process.env.AUTH_CORS  || '',
+
+      jwtSecret:    process.env.JWT_SECRET    || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
       host: process.env.HOST || '0.0.0.0',
       port: Number(process.env.PORT || 9000),
