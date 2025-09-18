@@ -13,9 +13,11 @@
     "medusa"
   ],
   "scripts": {
-    "setup": "medusa db:migrate && medusa db:sync-links && if [ \"$SEED_ON_START\" = \"true\" ]; then yarn run seed; else echo 'Skip seeding (SEED_ON_START!=true)'; fi",
+    "setup": "node ./scripts/db-ensure-extensions.js && medusa db:migrate && medusa db:sync-links && if [ \"$SEED_ON_START\" = \"true\" ]; then yarn run seed; else echo 'Skip seeding (SEED_ON_START!=true)'; fi",
     "build": "medusa build",
     "seed": "medusa exec ./src/scripts/seed.ts",
+    "setup:uae": "medusa exec ./src/scripts/setup-uae.ts",
+    "add:uae:crownbar": "medusa exec ./src/scripts/add-uae-crownbar.ts",
     "start": "NODE_OPTIONS=--dns-result-order=ipv4first sh -c 'yarn run setup && medusa start'",
     "dev": "medusa develop",
     "test:integration:http": "TEST_TYPE=integration:http NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
