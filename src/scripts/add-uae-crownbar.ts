@@ -73,7 +73,7 @@ export default async function addUaeCrownbar({ container }: ExecArgs) {
           description:
             "DTL/MLT両対応。800mAhバッテリー搭載、最大8000パフ。20+フレーバーから選択可能。UAE国内迅速配送。",
           options: [{ title: "Flavor", values: flavors }],
-          tags: ["disposable", "al-fakher", "crown-bar", "8000", "dtl"],
+          //tags: ["disposable", "al-fakher", "crown-bar", "8000", "dtl"],
           variants,
           metadata: {
             brand: "Al Fakher",
