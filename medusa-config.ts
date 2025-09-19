@@ -35,8 +35,7 @@ export default defineConfig({
 
       jwtSecret:    process.env.JWT_SECRET    || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
-      host: process.env.HOST || '0.0.0.0',
-      port: Number(process.env.PORT || 9000),
     },
   },
 })
+
